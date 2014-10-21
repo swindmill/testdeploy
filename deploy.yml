@@ -6,7 +6,7 @@
   tasks:
 
   - name: download sample .war file for deployment
-    get_url: url=https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war dest=/opt/apache-tomcat-7.0.55/webapps/
+    get_url: url="{{ artifact }}" dest=/opt/apache-tomcat-7.0.55/webapps/sample.war
     register: sample_war
 
   - name: restart Tomcat if sample.war was retrieved for first time or changed
