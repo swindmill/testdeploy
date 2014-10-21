@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  sudo: yes
+  tags: maplenet
+  tasks:
+
+  - name: download sample .war file for deployment
+    get_url: url=https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war dest=/opt/apache-tomcat-7.0.55/webapps/sample.war
+    register: sample_war
+
+  - name: restart Tomcat if sample.war was retrieved for first time or changed
+    service: name=maplenet state=restarted pattern=apache-tomcat-7.0.55
+    when: sample_war|changed
